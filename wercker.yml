@@ -1,0 +1,21 @@
+box: siniida/gennai-build
+build:
+  steps:
+    - script:
+        name: JDK7
+        code: |
+          alternatives --set java  /usr/java/jdk1.7.0_80/jre/bin/java
+          alternatives --set javac /usr/java/jdk1.7.0_80/bin/javac
+          mvn -version
+          cd gungnir
+          mvn clean package install -DskipTests=true
+          mvn test -DqueryTest=true
+    - script:
+        name: JDK8
+        code: |
+          alternatives --set java  /usr/java/jdk1.8.0_60/jre/bin/java
+          alternatives --set javac /usr/java/jdk1.8.0_60/bin/javac
+          mvn -version
+          cd gungnir
+          mvn clean package install -DskipTests=true
+          mvn test -DqueryTest=true
